@@ -7,7 +7,10 @@ import jakarta.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 import com.projetoweb.projetospring.entities.enums.OrderStatus;
 
 @Entity
@@ -29,6 +32,9 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> Items = new HashSet<>();
 
     public  Order() {
     }
@@ -75,6 +81,10 @@ public class Order implements Serializable {
 
     public void setMoment(Instant moment) {
         this.moment = moment;
+    }
+
+    public Set<OrderItem> getItems() {
+        return  Items;
     }
 
     @Override

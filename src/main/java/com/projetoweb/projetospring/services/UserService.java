@@ -21,6 +21,5 @@ public class UserService {
     public User findById(Long id) {
         Optional <User> obj = userRepository.findById(id);
         return obj.get();
-
     }
 }
